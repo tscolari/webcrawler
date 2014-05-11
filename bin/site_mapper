@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/web_crawler/stand_alone'
+require_relative '../lib/web_crawler'
+require_relative '../lib/web_crawler/command_line'
+WebCrawler::CommandLine.new.run(ARGV)

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="content">
+      <h1>Site Map</h1>
+
+      <ul>
+        <% @page_list.each do |path, page| %>
+          <li>
+            <div class="title">
+              <strong id="<%= Digest::MD5.hexdigest page.path %>"><%= page.title %></strong>
+              (<span class="url"><%= page.path %></span>)
+            </div>
+            <% if page.internal_links.present? %>
+              <ul>
+                <li> Internal Links </li>
+                <% page.internal_links.each do |link| %>
+                  <li><span class="glyphicon glyphicon-link"></span>
+                    <a href="#<%= Digest::MD5.hexdigest(link.path.to_s) %>"><%= link.path.to_s %></a>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+            <% if page.assets.present? %>
+              <ul>
+                <li> Assets </li>
+                <% page.assets.each do |link| %>
+                  <li><span class="glyphicon glyphicon-paperclip"></span>
+                    <a href="<%= link %>" target="_BLANK"><%= link %></a>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </body>
+</html>

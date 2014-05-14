@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.executables = ["site_mapper"]
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.required_ruby_version = ">= 2.1.1"
 
   s.add_dependency "activesupport"
   s.add_dependency "nokogiri"
@@ -23,8 +24,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec"
   s.add_development_dependency "simplecov"
   s.add_development_dependency "webmock"
-  s.add_development_dependency "pry"
-  s.add_development_dependency "pry-nav"
-  s.add_development_dependency "pry-byebug"
 
 end

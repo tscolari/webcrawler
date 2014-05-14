@@ -15,7 +15,7 @@ module WebCrawler
     end
 
     def run(args)
-      options = parse_args(args)
+      parse_args(args)
       validate_url!(options[:url])
       page_list = PageList.new(options[:url])
       crawler = Crawler.new(options[:url], page_list, @logger)
@@ -35,24 +35,38 @@ module WebCrawler
     end
 
     def parse_args(args)
-      Hash.new.tap do |options|
-        OptionParser.new do |opts|
-          opts.on("-o", "--output-file FILE_NAME", "./sitemap.html") do |file_name|
-            options[:output] = file_name
-          end
+      options_parser.parse!(args)
+      if options[:url].blank?
+        exit_with_error_message("URL Missing")
+      end
+    end
 
-          opts.on("-u", "--url URL_TO_CRAWL", "e.g. -u https://www.digitalocean.com/") do |url|
-            options[:url] = url
-          end
-        end.parse!(args)
-        if options[:url].blank?
-          raise OptionParser::MissingArgument.new("Missing url! Usage: site_mapper -u URL")
+    def exit_with_error_message(message)
+      puts "ERROR: #{message}"
+      puts options_parser.help
+      exit(1)
+    end
+
+    def options_parser
+      @options_parser ||= OptionParser.new do |opts|
+        opts.on("-o", "--output-file FILE_NAME", "./sitemap.html") do |file_name|
+          options[:output] = file_name
+        end
+
+        opts.on("-u", "--url URL_TO_CRAWL", "e.g. -u https://www.digitalocean.com/") do |url|
+          options[:url] = url
         end
       end
     end
 
+    def options
+      @options ||= Hash.new
+    end
+
     def validate_url!(url)
-      raise ArgumentError.new("Invalid URL given") unless url =~ URI::regexp
+      unless url =~ URI::regexp
+        exit_with_error_message("Invalid URL given")
+      end
     end
   end
 

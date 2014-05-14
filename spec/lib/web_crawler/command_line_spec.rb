@@ -27,18 +27,20 @@ module WebCrawler
 
     describe "#run" do
       context "no url given" do
-        it "should raise MissingArgument error" do
+        it "should render the exit_with_help message and quit" do
+          STDOUT.should_receive(:puts).twice
           expect {
             subject.run([])
-          }.to raise_error(OptionParser::MissingArgument)
+          }.to raise_error(SystemExit)
         end
       end
 
       context "invalid url given" do
-        it "should raise ArgumentError" do
+        it "should render the exit_with_help message and quit" do
+          STDOUT.should_receive(:puts).twice
           expect {
             subject.run(["-u", "1234"])
-          }.to raise_error(ArgumentError)
+          }.to raise_error(SystemExit)
         end
       end
 

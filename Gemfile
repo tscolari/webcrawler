@@ -2,6 +2,8 @@ source "https://rubygems.org"
 
 ruby "2.1.1"
 
+gem "rake"
+
 # Declare your gem's dependencies in web_crawler.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.

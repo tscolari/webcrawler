@@ -26,6 +26,7 @@ GEM
     multi_json (1.9.3)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    rake (10.3.1)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -51,6 +52,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  rake
   rspec
   simplecov
   web_crawler!

@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/tscolari/webcrawler.png)](https://codeclimate.com/github/tscolari/webcrawler)
+
 WebCrawler
 ==========
 
